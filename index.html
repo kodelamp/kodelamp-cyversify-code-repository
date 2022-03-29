@@ -993,8 +993,7 @@ Array
         </code>
     </pre>
     <p>The above strings can only be converted to an index array. This can be easily done by using the <code>explode()</code> function</p>
-    <h3>Converting To An Associative Array</h3>
-    <p></p>  
+    <h3>Converting A JSON String To An Associative Array</h3>
     <pre class="mb-0">
         <code class="language-php">    
 $str4 = '{"Math":3,"Teachers":37,"IT":4}';
@@ -1008,6 +1007,56 @@ stdClass Object
     [Teachers] => 37
     [IT] => 4
 )
+            </code>
+        </pre>
+        <h3>Retrieving Values From A stored Associative array: as fetched from database</h3>
+        <pre class="mb-0">
+        <code class="language-php">  
++----------------------------+
+| Department                 |
++----------------------------+
+| ["Spanish","Mathematics"]  |
++----------------------------+
+
+$user_role = ["Department" => '["Spanish","Mathematics"]'];
+print_r($user_role);
+
+//OUTPUT
+Array
+(
+    [Department] => ["Spanish","Mathematics"]
+)
+//convert values: ["Spanish","Mathematics"] of the key: "Department" to an index array using json_decode
+json_decode($user_role['Department'];
+
+
+//OUTPUT
+Array
+(
+    [0] => Spanish
+    [1] => Mathematics
+)
+
+//count values in index array
+$array_count = count(json_decode($user_role['Department']));
+
+//OUTPUT
+//2
+
+//run a for loop to echo each value
+for ($x = 0;$x < $array_count;$x++) {
+
+    if($x == $array_count - 2){
+        $comma = " and ";
+    }elseif($x== $array_count - 1){
+        $comma = "";
+    }else{
+        $c = ", ";
+    }
+    echo $array[$x] . "$comma";
+}
+//OUTPUT
+Spanish and Mathematics
             </code>
         </pre>
     
